@@ -178,6 +178,9 @@ flex-direction: column;
     align-items: flex-end;
 }
 
+.icono h2 {
+    display: inline-block;
+}
 
 
 /*Servicios*/
