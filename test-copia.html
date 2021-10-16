@@ -59,7 +59,7 @@
             Para poder comprobar su información se pide ingresar los datos de nombres de usuario, usuario de redes sociales y correo electrónico.
         </p>
 
-        <form class="formulario">
+        <form id="formulario" class="formulario" onSubmit="return handleClick()">
             <div id="form">
                 <p>
                     <b>FORMULARIO DE BÚSQUEDA</b>  
@@ -78,8 +78,10 @@
                 </p>
                 <input class="input-text" placeholder="Su correo electrónico" id="correo"><br>
                 <div class="alinear-derecha flex">
-                    <button onclick="consultarAPIs()" id="btn2"input class="boton w-sm-100" type="submit" >Enviar</button>
+                    <input id="btn2" name="Submit"  type="submit" value="Enviar" class="boton w-sm-100"/>
+                    <!--<button onclick="consultarAPIs()" id="btn2"input class="boton w-sm-100" type="submit" >Enviar</button>-->
                 </div>
+                <img src="img\loading.gif" style="width: 100px; visibility: hidden" id="loading2">    
             </div>
 
             <p>
@@ -88,30 +90,39 @@
             <div id='flag_1' style="visibility: hidden">
                 <div id='flag_1.1' style="visibility: hidden">
                     Mensaje expuesto profile Facebook
+                    <p id='text_flag_1.1'></p>
                 </div>
                 <div id='flag_1.2' style="visibility: hidden">
                     Mensaje expuesto profile Twitter
+                    <p id='text_flag_1.2'></p>
                 </div>
                 <div id='flag_1.3' style="visibility: hidden">
                     Mensaje expuesto profile Linkedin
+                    <p id='text_flag_1.3'></p>
                 </div>
                 <div id='flag_1.4' style="visibility: hidden">
                     Mensaje expuesto profile Instagram
+                    <img id="img_flag_1.4" src="compman.gif" width="107" height="98">
                 </div>
             </div>
             <div id='flag_2' style="visibility: hidden">
                 Mensaje expuesto foto
+                <img id="img_flag_2" src="compman.gif" width="107" height="98">
             </div>
             <div id='flag_3' style="visibility: hidden">
                 Mensaje expuesto dirección
+                <p id='text_flag_3'></p>
             </div>
             <div id='flag_4' style="visibility: hidden">
                 Mensaje expuesto trabajo
+                <p id='text_flag_4'></p>
             </div>
             <div id='flag_5' style="visibility: hidden">
                 Mensaje de informacion de edad
+                <p id='text_flag_5'></p>
             </div>
-            <img src="img\loading.gif" style="width: 100px; visibility: hidden" id="loading2">
+            
+            
         </form>
     </main>
 </body>

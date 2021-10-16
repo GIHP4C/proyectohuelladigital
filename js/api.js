@@ -32,7 +32,10 @@ var settingsAPI1 = {
     //"data": "{\r\n\"email\": \"snriedel85@gmail.com\"\r\n}",
 };
 
-
+function handleClick(event) {
+    consultarAPIs()
+    return false;
+}
 async function consultarAPIs() {
     const usuario = $("#usuario").val()
     const correo = $("#correo").val()
@@ -81,7 +84,7 @@ async function consultarAPIs() {
                     console.log(response);
                     perfil['api_full_contact'] = response
                 }).fail(function (error) {
-                    console.log("Error "+error);
+                    console.log("Error " + error);
                 });
             } catch (error) {
                 console.error(error);
@@ -133,39 +136,71 @@ function checkFlags(response) {
             showElements('flag_1')
             showElements('flag_1.1')
             flags.profileFacebook = response['api_full_contact']['facebook']
+            document.getElementById("text_flag_1.1").innerHTML = flags.profileFacebook;
         }
         if (!!response['api_full_contact']['twitter']) {
             showElements('flag_1')
             showElements('flag_1.2')
             flags.profileTwitter = response['api_full_contact']['twitter']
+            document.getElementById("text_flag_1.2").innerHTML = flags.profileTwitter;
         }
         if (!!response['api_full_contact']['linkedin']) {
             showElements('flag_1')
             showElements('flag_1.3')
             flags.profileLinkedin = response['api_full_contact']['linkedin']
+            document.getElementById("text_flag_1.3").innerHTML = flags.profileLinkedin;
         }
         if (!!response['api_full_contact']['details']['photos']) {
             if (response['api_full_contact']['details']['photos'].length > 0) {
                 showElements('flag_2')
                 flags.photos = response['api_full_contact']['details']['photos']
+                console.log(flags.photos)
+                document.getElementById("img_flag_2").src = flags.photos[0].value;
             }
         }
         if (!!response['api_full_contact']['details']['locations']) {
             if (response['api_full_contact']['details']['locations'].length > 0) {
                 showElements('flag_3')
                 flags.locations = response['api_full_contact']['details']['locations']
+                text=''
+                for (const address in flags.locations){
+                    //console.log(flags.locations[address])
+                    if('formatted' in flags.locations[address]){
+                        text += flags.locations[address].formatted+"\n"
+                    }
+                }
+                //console.log(text)
+                document.getElementById("text_flag_3").innerHTML = text;
             }
         }
         if (!!response['api_full_contact']['details']['employment']) {
             if (response['api_full_contact']['details']['employment'].length > 0) {
                 showElements('flag_4')
                 flags.employment = response['api_full_contact']['details']['employment']
+                //console.log(flags.employment)
+                text=''
+                for (const id in flags.employment){
+                    //console.log(flags.locations[address])
+                    if('name' in flags.employment[id]){
+                        console.log(flags.employment[id])
+                        text += '- Nombre: '+flags.employment[id].name+"\n"
+                    }
+                }
+                document.getElementById("text_flag_4").innerHTML = text;
             }
         }
         if (!!response['api_full_contact']['details']['education']) {
             if (response['api_full_contact']['details']['education'].length > 0) {
                 showElements('flag_5')
                 flags.education = response['api_full_contact']['details']['education']
+                console.log(flags.education)
+                text=''
+                for (const id in flags.education){
+                    if('degree' in flags.education[id]){
+                        text += '- Nombre: '+flags.education[id].degree+"\n"
+                    }
+                }
+                document.getElementById("text_flag_5").innerHTML = text;
             }
         }
         if (!!response['api_full_contact']['ageRange']) {
@@ -200,3 +235,10 @@ function showElements(elementID) {
     const element = document.getElementById(elementID)
     element.style.visibility = 'visible';
 }
+
+
+
+
+$("#formulario").submit(function(e) {
+    e.preventDefault();
+});
