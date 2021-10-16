@@ -193,7 +193,6 @@ function checkFlags(response) {
             if (response['api_full_contact']['details']['education'].length > 0) {
                 showElements('flag_5')
                 flags.education = response['api_full_contact']['details']['education']
-                console.log(flags.education)
                 text=''
                 for (const id in flags.education){
                     if('degree' in flags.education[id]){
@@ -204,8 +203,10 @@ function checkFlags(response) {
             }
         }
         if (!!response['api_full_contact']['ageRange']) {
-            showElements('flag_5')
+            showElements('flag_6')
             flags.ageRange = response['api_full_contact']['ageRange']
+            //console.log(flags.ageRange)
+            document.getElementById("text_flag_6").innerHTML = flags.ageRange;
         }
     }
     //Rapid API Instragram
@@ -225,6 +226,7 @@ function hidenAllFlags() {
     hiddenElements('flag_3')
     hiddenElements('flag_4')
     hiddenElements('flag_5')
+    hiddenElements('flag_6')
 }
 
 function hiddenElements(elementID) {
