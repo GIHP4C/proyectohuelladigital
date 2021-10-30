@@ -1,9 +1,3 @@
-
-
-//Import module enviroment.prod.js
-//import { Enviroment } from "./enviroment.prod";
-//const enviroment = new Enviroment()
-
 //Configuraciones API Instragram
 urlAPI2 = "https://instagram29.p.rapidapi.com/user/"
 var settingsAPI2 = {
