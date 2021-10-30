@@ -43,7 +43,7 @@ async function consultarAPIs() {
         //hiddenElements("usuario")
         showElements("loading2")
         settingsAPI2.url=urlAPI2+usuario
-        /*if(!!correo){
+        if(!!correo){
             settingsAPI1['data']="{\r\n\"email\": \""+correo+"\"\r\n}"
             console.log('Run api')
             console.log(settingsAPI1)
@@ -51,9 +51,9 @@ async function consultarAPIs() {
                 console.log(response);
             });
             console.log('API Done')
-        }*/
+        }
         
-        await $.ajax(settingsAPI2).done(function (response) {
+        /*await $.ajax(settingsAPI2).done(function (response) {
             console.log(response);
             perfil['api_instragram']=response['data']
             showElements("form")
@@ -64,7 +64,7 @@ async function consultarAPIs() {
             showElements("form")
             //showElements("usuario")
             hiddenElements("loading2")
-        });
+        });*/
     }else{
         console.warn("Texto en blanco no valido")
     }
