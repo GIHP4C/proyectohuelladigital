@@ -12,6 +12,7 @@
         <link href="css/styles.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="js/api.js"></script>
+        <script src="js/enviroment.prod.js"></script>
     </head>
 
 
@@ -81,14 +82,17 @@
                     <input id="btn2" name="Submit"  type="submit" value="Enviar" class="boton w-sm-100"/>
                     <!--<button onclick="consultarAPIs()" id="btn2"input class="boton w-sm-100" type="submit" >Enviar</button>-->
                 </div>
-                <img src="img\loading.gif" style="width: 100px; visibility: hidden" id="loading2">    
+                  
             </div>
-
+            <img src="img\loading-2.gif" style="width: 100px; visibility: hidden; display: none" id="loading2">
+            <div id='loading3' style="visibility: hidden; display: none">
+                <p><b>Los datos procesados en el formularion no se almacenan.</b></p>
+            </div>
             <p>
                <b>RESPUESTA:</b> 
             </p>
-            <div id='flag_1' style="visibility: hidden">
-                <div id='flag_1.1' style="visibility: hidden">
+            <div id='flag_1' style="visibility: hidden; display: none">
+                <div id='flag_1.1' style="visibility: hidden; display: none">
                     <p><b>Perfil encontrado</b></p>
                     <p id='text_flag_1.1'></p>
                     <p><b>Perfil expuesto en Instagram</b></p>
@@ -101,7 +105,7 @@
                         </p>
                     
                 </div>
-                <div id='flag_1.2' style="visibility: hidden">
+                <div id='flag_1.2' style="visibility: hidden; display: none">
 
                     <p><b>Perfil encontrado</b></p>
 
@@ -125,11 +129,24 @@
                         <p>Reforzar la seguridad,activar la opción de verificación de sesión </p>
 
                 </div>
-                <div id='flag_1.3' style="visibility: hidden">
+                <div id='flag_1.3' style="visibility: hidden; display: none">
                     <p><b>Mensaje expuesto profile Linkedin</b></p>
                     <p id='text_flag_1.3'></p>
                 </div>
-                <div id='flag_1.4' style="visibility: hidden">
+                <div id='flag_1.5' style="visibility: hidden; display: none">
+                    <p><b>Mensaje perfil es publico en Instagram</b></p>
+                    <p id='text_flag_1.5'></p>
+                </div>
+                <div id='flag_1.6' style="visibility: hidden; display: none">
+                    <p><b>Mensaje expuesto enlace de página web</b></p>
+                    <p id='text_flag_1.6'></p>
+                </div>
+                
+                <div id='flag_1.7' style="visibility: hidden; display: none">
+                    <p><b>Seguidores de su cuenta de Instagram</b></p>
+                    <p id='text_flag_1.7'></p>
+                </div>
+                <div id='flag_1.4' style="visibility: hidden; display: none">
                     <p><b>Mensaje expuesto profile Instagram</b></p>
                     <img id="img_flag_1.4" src="" width="107" height="98">
                     <p><b>Ataque de ingeniería social</b></p>
@@ -149,9 +166,10 @@
     
                 </div>
             </div>
-            <div id='flag_2' style="visibility: hidden">
+            <div id='flag_2' style="visibility: hidden; display: none; display: none">
   
                 <p><b>Fotografías encontradas del usuario</b></p>
+                <!--Show img from distinct origin-->
 
                 <img id="img_flag_2" src="" width="107" height="98">                
                 <p><b>Fotografías públicas</b></p>
@@ -180,7 +198,7 @@
                         <p>Denunciar las cuentas falsas.</p>
                             
             </div>
-            <div id='flag_3' style="visibility: hidden">
+            <div id='flag_3' style="visibility: hidden; display: none">
                 <p><b>Información econtrada de dirección de trabajo expuesta en redes sociales</b></p>
                 <p id='text_flag_3'></p>
 
@@ -205,7 +223,7 @@
                     <p>No hacer clic en enlaces sospechosos.</p>
                             
             </div>
-            <div id='flag_4' style="visibility: hidden">
+            <div id='flag_4' style="visibility: hidden; display: none">
                 <p><b>Información econtrada de dirección de domicilio expuesta en redes sociales</b></p>
                 <p id='text_flag_4'></p>
                 <p>Al tener la dirección de forma pública se puede tener las siguientes consecuencias:</p>
@@ -228,7 +246,7 @@
                                   
 
             </div>
-            <div id='flag_5' style="visibility: hidden">
+            <div id='flag_5' style="visibility: hidden; display: none">
                 <p><b>Información econtrada de educación expuesta en redes sociales</b></p>
                 <p id='text_flag_5'></p>
 
@@ -253,7 +271,7 @@
                                                            
 
             </div>
-            <div id='flag_6' style="visibility: hidden">
+            <div id='flag_6' style="visibility: hidden; display: none">
                 <p><b>Información econtrada de edad expuesta en redes sociales</b></p>
 
                 <p id='text_flag_6'></p>

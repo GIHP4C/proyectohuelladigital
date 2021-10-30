@@ -1,4 +1,9 @@
 
+
+//Import module enviroment.prod.js
+//import { Enviroment } from "./enviroment.prod";
+//const enviroment = new Enviroment()
+
 //Configuraciones API Instragram
 urlAPI2 = "https://instagram29.p.rapidapi.com/user/"
 var settingsAPI2 = {
@@ -51,7 +56,8 @@ async function consultarAPIs() {
         hiddenElements("form")
         //hiddenElements("usuario")
         showElements("loading2")
-        settingsAPI2.url = urlAPI2 + usuario
+        showElements("loading3")
+        
 
         //Service Full Contact
         if (!!correo || !!usuario) {
@@ -74,30 +80,43 @@ async function consultarAPIs() {
                 }
                 dataConf = dataConf + "\r\n\"fullName\": \"" + nombre + "\"\r\n"
             }
-            settingsAPI1['data'] = "{" + dataConf + "}"
-            console.log(settingsAPI1['data'])
-            console.log('Run api')
-            console.log(settingsAPI1)
-            try {
-                await $.ajax(settingsAPI1).done(function (response) {
-                    console.log("Response");
-                    console.log(response);
-                    perfil['api_full_contact'] = response
-                }).fail(function (error) {
-                    console.log("Error " + error);
-                });
-            } catch (error) {
-                console.error(error);
+            if (!!correo || !!usuario) {
+                //API1
+                settingsAPI1['data'] = "{" + dataConf + "}"
+                console.log(settingsAPI1['data'])
+                console.log('Run api')
+                console.log(settingsAPI1)
+                try {
+                    await $.ajax(settingsAPI1).done(function (response) {
+                        console.log("Response");
+                        console.log(response);
+                        perfil['api_full_contact'] = response
+                    }).fail(function (error) {
+                        console.log("Error API1: " + error);
+                    });
+                } catch (error) {
+                    console.error(error);
+                }
             }
-
+            
+            //API2
+            if(!!usuario){
+                settingsAPI2.url = urlAPI2 + usuario
+                try {
+                    await $.ajax(settingsAPI2).done(function (response) {
+                        console.log(response);
+                        perfil['api_instragram']=response['data']
+                    }).fail(function (response) {
+                        console.error("Error API2: "+response);
+                    });
+                } catch (error) {
+                    console.error(error);
+                }
+            }
             console.log('API Done')
         }
-<<<<<<< HEAD
-        
-=======
 
 
->>>>>>> bfd8bd183e519f0d090bc2d9101a0831048d7c22
         /*await $.ajax(settingsAPI2).done(function (response) {
             console.log(response);
             perfil['api_instragram']=response['data']
@@ -110,18 +129,15 @@ async function consultarAPIs() {
             //showElements("usuario")
             hiddenElements("loading2")
         });*/
-<<<<<<< HEAD
-    }else{
-=======
 
         console.log(perfil)
 
         showElements("form")
         hiddenElements("loading2")
+        hiddenElements("loading3")
         checkFlags(perfil)
 
     } else {
->>>>>>> bfd8bd183e519f0d090bc2d9101a0831048d7c22
         console.warn("Texto en blanco no valido")
     }
 
@@ -218,11 +234,40 @@ function checkFlags(response) {
         }
     }
     //Rapid API Instragram
-    /*if(!!response['api_instragram']){
-        if(!!response['api_instragram']['facebook']){
-            flags.profileFacebook=response['api_full_contact']['facebook']
+    if(!!response['api_instragram']){
+        if(!!response['api_instragram']['user']){
+            if (!!response['api_instragram']['user']['username'] && !!response['api_instragram']['user']['is_private']==false) {
+                showElements('flag_1')
+                showElements('flag_1.5')
+                flags.profileInstagram = response['api_instragram']['user']['username']
+                document.getElementById("text_flag_1.5").innerHTML = flags.profileInstagram;
+            }
+            if (!!response['api_instragram']['user']['website']) {
+                showElements('flag_1')
+                showElements('flag_1.6')
+                flags.profileWebsite = response['api_instragram']['user']['website']
+                document.getElementById("text_flag_1.6").innerHTML = flags.profileWebsite;
+            }
+            if (!!response['api_instragram']['user']['follower_count']) {
+                showElements('flag_1')
+                showElements('flag_1.7')
+                flags.profileFollower = response['api_instragram']['user']['follower_count']
+                document.getElementById("text_flag_1.7").innerHTML = flags.profileFollower;
+            }
+            /*if (!!response['api_instragram']['user']['profile_pic_url']) {
+                console.log("Photo")
+                showElements('flag_2')
+                flags.photo_instagram = response['api_instragram']['user']['profile_pic_url']
+                console.log(flags.photos)
+                document.getElementById("img_flag_2").src = flags.photo_instagram;
+            }*/
+
         }
-    }*/
+        /*if(!!response['api_instragram']['facebook']){
+            flags.profileFacebook=response['api_full_contact']['facebook']
+        }*/
+        
+    }
 }
 
 function hidenAllFlags() {
@@ -240,10 +285,12 @@ function hidenAllFlags() {
 function hiddenElements(elementID) {
     const element = document.getElementById(elementID)
     element.style.visibility = 'hidden';
+    element.style.display = 'none';
 }
 function showElements(elementID) {
     const element = document.getElementById(elementID)
     element.style.visibility = 'visible';
+    element.style.display = '';
 }
 
 
@@ -252,3 +299,13 @@ function showElements(elementID) {
 $("#formulario").submit(function(e) {
     e.preventDefault();
 });
+
+//console.log(enviroment.enviroment)
+
+async function getData() {
+    //Open json from enviroment/enviroment.json
+    let enviroment = await fetch("./enviroment/enviroment.json")
+    enviroment = await enviroment.json()
+    console.log(enviroment)
+}
+//getData()
