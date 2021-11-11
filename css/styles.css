@@ -67,7 +67,14 @@ body{
     border-radius: 1rem;
 }
 
-
+.sombra1{
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(250, 248, 248, 0.952);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(250, 248, 248, 0.952);
+    box-shadow: 0px 5px 15px 0px rgba(250, 248, 248, 0.952);
+    background-color: var(--grisClaro);
+    padding: 2rem;
+    border-radius: 1rem;
+}
 
 /*Tipografia*/
 h1{
