@@ -25,8 +25,8 @@ var settingsAPI1 = {
     "headers": {
         "Authorization": "Bearer GIbUNEeE0ZBei7W7ZzHMw6LK0iwfz7Md",
         "Content-Type": "text/plain",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true
+        //"Access-Control-Allow-Origin": "*",
+        //"Access-Control-Allow-Credentials": true
     },
     //"data": "{\r\n\"email\": \"snriedel85@gmail.com\"\r\n}",
 };
@@ -48,10 +48,10 @@ async function consultarAPIs() {
 
     if (!!usuario || !!correo) {
         hiddenElements("form")
-        //hiddenElements("usuario")
+            //hiddenElements("usuario")
         showElements("loading2")
         showElements("loading3")
-        
+
 
         //Service Full Contact
         if (!!correo || !!usuario) {
@@ -81,27 +81,27 @@ async function consultarAPIs() {
                 console.log('Run api')
                 console.log(settingsAPI1)
                 try {
-                    await $.ajax(settingsAPI1).done(function (response) {
+                    await $.ajax(settingsAPI1).done(function(response) {
                         console.log("Response");
                         console.log(response);
                         perfil['api_full_contact'] = response
-                    }).fail(function (error) {
+                    }).fail(function(error) {
                         console.log("Error API1: " + error);
                     });
                 } catch (error) {
                     console.error(error);
                 }
             }
-            
+
             //API2
-            if(!!usuario){
+            if (!!usuario) {
                 settingsAPI2.url = urlAPI2 + usuario
                 try {
-                    await $.ajax(settingsAPI2).done(function (response) {
+                    await $.ajax(settingsAPI2).done(function(response) {
                         console.log(response);
-                        perfil['api_instragram']=response['data']
-                    }).fail(function (response) {
-                        console.error("Error API2: "+response);
+                        perfil['api_instragram'] = response['data']
+                    }).fail(function(response) {
+                        console.error("Error API2: " + response);
                     });
                 } catch (error) {
                     console.error(error);
@@ -139,16 +139,16 @@ async function consultarAPIs() {
 
 function checkFlags(response) {
     flags = {
-        profileFacebook: '',
-        profileTwitter: '',
-        profileLinkedin: '',
-        profileInstagram: '',
-        photos: [],
-        locations: [],
-        employment: [],
-        education: [],
-    }
-    //Full Contact
+            profileFacebook: '',
+            profileTwitter: '',
+            profileLinkedin: '',
+            profileInstagram: '',
+            photos: [],
+            locations: [],
+            employment: [],
+            education: [],
+        }
+        //Full Contact
     if (!!response['api_full_contact']) {
         if (!!response['api_full_contact']['facebook']) {
             showElements('flag_1')
@@ -180,11 +180,11 @@ function checkFlags(response) {
             if (response['api_full_contact']['details']['locations'].length > 0) {
                 showElements('flag_3')
                 flags.locations = response['api_full_contact']['details']['locations']
-                text=''
-                for (const address in flags.locations){
+                text = ''
+                for (const address in flags.locations) {
                     //console.log(flags.locations[address])
-                    if('formatted' in flags.locations[address]){
-                        text += flags.locations[address].formatted+"\n"
+                    if ('formatted' in flags.locations[address]) {
+                        text += flags.locations[address].formatted + "\n"
                     }
                 }
                 //console.log(text)
@@ -195,13 +195,13 @@ function checkFlags(response) {
             if (response['api_full_contact']['details']['employment'].length > 0) {
                 showElements('flag_4')
                 flags.employment = response['api_full_contact']['details']['employment']
-                //console.log(flags.employment)
-                text=''
-                for (const id in flags.employment){
+                    //console.log(flags.employment)
+                text = ''
+                for (const id in flags.employment) {
                     //console.log(flags.locations[address])
-                    if('name' in flags.employment[id]){
+                    if ('name' in flags.employment[id]) {
                         console.log(flags.employment[id])
-                        text += '- Nombre: '+flags.employment[id].name+"\n"
+                        text += '- Nombre: ' + flags.employment[id].name + "\n"
                     }
                 }
                 document.getElementById("text_flag_4").innerHTML = text;
@@ -211,10 +211,10 @@ function checkFlags(response) {
             if (response['api_full_contact']['details']['education'].length > 0) {
                 showElements('flag_5')
                 flags.education = response['api_full_contact']['details']['education']
-                text=''
-                for (const id in flags.education){
-                    if('degree' in flags.education[id]){
-                        text += '- Nombre: '+flags.education[id].degree+"\n"
+                text = ''
+                for (const id in flags.education) {
+                    if ('degree' in flags.education[id]) {
+                        text += '- Nombre: ' + flags.education[id].degree + "\n"
                     }
                 }
                 document.getElementById("text_flag_5").innerHTML = text;
@@ -223,14 +223,14 @@ function checkFlags(response) {
         if (!!response['api_full_contact']['ageRange']) {
             showElements('flag_6')
             flags.ageRange = response['api_full_contact']['ageRange']
-            //console.log(flags.ageRange)
+                //console.log(flags.ageRange)
             document.getElementById("text_flag_6").innerHTML = flags.ageRange;
         }
     }
     //Rapid API Instragram
-    if(!!response['api_instragram']){
-        if(!!response['api_instragram']['user']){
-            if (!!response['api_instragram']['user']['username'] && !!response['api_instragram']['user']['is_private']==false) {
+    if (!!response['api_instragram']) {
+        if (!!response['api_instragram']['user']) {
+            if (!!response['api_instragram']['user']['username'] && !!response['api_instragram']['user']['is_private'] == false) {
                 showElements('flag_1')
                 showElements('flag_1.5')
                 flags.profileInstagram = response['api_instragram']['user']['username']
@@ -260,7 +260,7 @@ function checkFlags(response) {
         /*if(!!response['api_instragram']['facebook']){
             flags.profileFacebook=response['api_full_contact']['facebook']
         }*/
-        
+
     }
 }
 
@@ -281,6 +281,7 @@ function hiddenElements(elementID) {
     element.style.visibility = 'hidden';
     element.style.display = 'none';
 }
+
 function showElements(elementID) {
     const element = document.getElementById(elementID)
     element.style.visibility = 'visible';
